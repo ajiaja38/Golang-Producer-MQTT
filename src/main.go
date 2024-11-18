@@ -33,7 +33,7 @@ func main() {
 	opts.AddBroker(HOST)
 	opts.SetUsername(USERNAME)
 	opts.SetPassword(PASSWORD)
-	opts.SetClientID("producer")
+	opts.SetClientID("producer-mqtt")
 
 	client := mqtt.NewClient(opts)
 
