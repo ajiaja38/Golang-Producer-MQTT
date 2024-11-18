@@ -17,8 +17,8 @@ func main() {
 	exception.ErrorOnFail(err, "Failed Load .env file")
 
 	body := model.UserDao{
-		Name:        "M. Aji Perdana",
-		Age:         23,
+		Name:        "Erlin Novasia",
+		Age:         22,
 		PhoneNumber: "085695951121",
 		Address:     "Lampung",
 		Message:     "Message From MQTT",
@@ -54,5 +54,5 @@ func main() {
 		log.Printf("Message Published to topic '%s': %s", TOPIC, jsonBody)
 	}
 
-	fmt.Println("Mqtt Producer Golang")
+	log.Print("MQTT Producer is running...")
 }
