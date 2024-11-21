@@ -54,5 +54,5 @@ func main() {
 		log.Printf("Message Published to topic '%s': %s", TOPIC, jsonBody)
 	}
 
-	log.Print("MQTT Producer is running...")
+	log.Print("MQTT Producer is running ✨...")
 }
