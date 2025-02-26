@@ -1,10 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"go-producer-mqtt/src/exception"
-	"go-producer-mqtt/src/model"
 	"log"
 	"os"
 
@@ -15,14 +13,6 @@ import (
 func main() {
 	err := godotenv.Load()
 	exception.ErrorOnFail(err, "Failed Load .env file")
-
-	body := model.UserDao{
-		Name:        "Erlin Novasia",
-		Age:         22,
-		PhoneNumber: "085695951121",
-		Address:     "Lampung",
-		Message:     "Message From MQTT",
-	}
 
 	HOST := os.Getenv("MQTT_HOST")
 	USERNAME := os.Getenv("MQTT_USER")
@@ -42,16 +32,17 @@ func main() {
 	}
 	defer client.Disconnect(250)
 
-	jsonBody, err := json.Marshal(body)
 	exception.ErrorOnFail(err, "Failed masrhal struct to json")
 
-	token := client.Publish(TOPIC, 0, false, jsonBody)
+	payload := "68ea3da6-c04a-41ce-815e-a18392921f8b#1"
+
+	token := client.Publish(TOPIC, 0, false, payload)
 	token.Wait()
 
 	if token.Error() != nil {
 		exception.ErrorOnFail(token.Error(), fmt.Sprintf("Falied Publish message: %v", token.Error()))
 	} else {
-		log.Printf("Message Published to topic '%s': %s", TOPIC, jsonBody)
+		log.Printf("Message Published to topic '%s': %s", TOPIC, payload)
 	}
 
 	log.Print("MQTT Producer is running... ✨")
