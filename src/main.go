@@ -30,11 +30,12 @@ func main() {
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
 		log.Fatalf("Failed to connect to MQTT broker: %v", token.Error())
 	}
+
 	defer client.Disconnect(250)
 
 	exception.ErrorOnFail(err, "Failed masrhal struct to json")
 
-	payload := "68ea3da6-c04a-41ce-815e-a18392921f8b#1"
+	payload := "28134261-6a2b-4d52-9037-32c82fdca08d#00"
 
 	token := client.Publish(TOPIC, 0, false, payload)
 	token.Wait()
